@@ -1,0 +1,145 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --slider-size: 90%;
+  --slide-border-radius: 7px;
+
+}
+
+body {
+  background-color: #333;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 100%;
+}
+
+.slider__header {
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress_box {
+  display: flex;
+  gap: 5px;
+}
+
+.progress_bar {
+  display: inline-block;
+  width: 25px;
+  height: 4px;
+  background-color: #fff2;
+}
+
+.progress_bar.active {
+  display: inline-block;
+  width: 25px;
+  height: 4px;
+  background-color: #fff9;
+}
+
+.slider {
+  --slide-per-screen: 2;
+  --slide-gap: 5px;
+  --slide-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.inner_slider {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: var(--slide-gap);
+  /* margin-left: var(--slide-gap); */
+  transform: translateX(calc(var(--slide-index) * 100%));
+  transition: transform 800ms ease-in-out;
+}
+
+.slide {
+  min-width: calc((100% / var(--slide-per-screen)) - var(--slide-gap));
+  max-width: calc((100% / var(--slide-per-screen)) - var(--slide-gap));
+  border-radius: var(--slide-border-radius);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.slide>img {
+  width: 100%;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  border: none;
+  width: calc((100% - var(--slider-size)) / 2);
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  z-index: 9;
+}
+
+.btn:hover {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.btn:focus     {
+  background-color: rgba(0, 0, 0, 0.795);  
+  outline: red;
+}
+
+.btn--right {
+  right: 0;
+  border-top-left-radius: var(--slide-border-radius);
+  border-bottom-left-radius: var(--slide-border-radius);
+}
+
+.btn--left {
+  left: 0;
+  border-top-right-radius: var(--slide-border-radius);
+  border-bottom-right-radius: var(--slide-border-radius);
+  width: calc((100% - var(--slider-size)) / 2 - var(--slide-gap));
+}
+
+.btn>div {
+  font-size: 50px;
+  color: #fff;
+}
+
+@media (max-width: 1980px) {
+  .slider {
+    --slide-per-screen: 4;
+  }
+}
+
+@media (max-width: 1000px) {
+  .slider {
+    --slide-per-screen: 3;
+  }
+}
+
+@media (max-width: 750px) {
+  .slider {
+    --slide-per-screen: 2;
+  }
+}
+
+@media (max-width: 550px) {
+  .slider {
+    --slide-per-screen: 1;
+  }
+}
